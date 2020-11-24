@@ -17,15 +17,15 @@ interface HikeDao {
     @Query("SELECT * FROM hike")
     fun getAll() : MutableList<Hike>
 
-//    @Query("SELECT * FROM hike WHERE area LIKE :area")
-//    fun findByArea(area: String) : MutableList<Hike>
-
     @Query("SELECT * FROM hike WHERE nightstops LIKE :numberOfNightStops")
     fun findByNightStops(numberOfNightStops: Int) : MutableList<Hike>
 
     @Query("SELECT * FROM hike WHERE category LIKE :category")
     fun findByCategory(category: String) : MutableList<Hike>
 
-    @Query("SELECT * FROM hike WHERE length LIKE :length")
+    @Query("SELECT * FROM hike WHERE length < :length")
     fun findByLength(length: Int) : MutableList<Hike>
+
+    @Query("SELECT * FROM hike WHERE favorite LIKE :favorite")
+    fun findByFavorite(favorite: Boolean) : MutableList<Hike>
 }

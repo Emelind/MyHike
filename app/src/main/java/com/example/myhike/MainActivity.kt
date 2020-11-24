@@ -24,9 +24,9 @@ class MainActivity : AppCompatActivity() , CoroutineScope {
     private lateinit var recyclerView: RecyclerView
 
     var chosenFilter = ""
-    val categoryForest = "Forest"
-    val categoryMountain = "Mountain"
-    val categoryCoastal = "Coastal"
+    private val categoryForest = "Forest"
+    private val categoryMountain = "Mountain"
+    private val categoryCoastal = "Coastal"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -105,6 +105,13 @@ class MainActivity : AppCompatActivity() , CoroutineScope {
                         recyclerView.adapter?.notifyDataSetChanged()
                     }
                 }
+                "Favorites" -> {
+                    launch {
+                        hikes = loadByFavorite(true).await()
+                        recyclerView.adapter = Adapter(this@MainActivity, hikes)
+                        recyclerView.adapter?.notifyDataSetChanged()
+                    }
+                }
             }
         }
 
@@ -137,7 +144,12 @@ class MainActivity : AppCompatActivity() , CoroutineScope {
         }
 
     private fun loadByLength(length: Int) : Deferred<MutableList<Hike>> =
-            async(Dispatchers.IO) {
-                db.hikeDao.findByLength(length)
-            }
+        async(Dispatchers.IO) {
+             db.hikeDao.findByLength(length)
+        }
+
+    private fun loadByFavorite(favorite: Boolean) : Deferred<MutableList<Hike>> =
+        async(Dispatchers.IO) {
+            db.hikeDao.findByFavorite(favorite)
+        }
 }

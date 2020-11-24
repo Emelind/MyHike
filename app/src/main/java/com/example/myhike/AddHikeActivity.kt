@@ -1,28 +1,15 @@
 package com.example.myhike
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
 class AddHikeActivity : AppCompatActivity() , CoroutineScope {
 
-    lateinit var addHikeName: EditText
-    lateinit var addHikeArea: EditText
-    lateinit var addHikeCategorySpinner: Spinner
-    lateinit var addHikeLength: EditText
-    lateinit var addHikeNumberOfNightStops: EditText
-    lateinit var addHikeFavorite: CheckBox
-    lateinit var buttonAddHikeSave: Button
-    lateinit var buttonAddHikeCancel: Button
-    val categoryForest = "Forest"
-    val categoryMountain = "Mountain"
-    val categoryCoastal = "Coastal"
     val categoryNotApplicable = "Not Applicable"
     var chosenCategory = ""
 
@@ -39,17 +26,17 @@ class AddHikeActivity : AppCompatActivity() , CoroutineScope {
         job = Job()
         db = AppDatabase.getInstance(this)
 
-        addHikeName = findViewById(R.id.addHikeName)
-        addHikeArea = findViewById(R.id.addHikeAreaName)
-        addHikeLength = findViewById(R.id.addHikeLength)
-        addHikeNumberOfNightStops = findViewById(R.id.addHikeNumberOfNightStops)
-        addHikeFavorite = findViewById(R.id.addHikeFavoriteCheckBox)
-        buttonAddHikeSave = findViewById(R.id.button_addHikeSave)
-        buttonAddHikeCancel = findViewById(R.id.button_addHikeCancel)
+        val addHikeName = findViewById<EditText>(R.id.addHikeName)
+        val addHikeArea = findViewById<EditText>(R.id.addHikeAreaName)
+        val addHikeLength = findViewById<EditText>(R.id.addHikeLength)
+        val addHikeNumberOfNightStops = findViewById<EditText>(R.id.addHikeNumberOfNightStops)
+        val addHikeFavorite = findViewById<CheckBox>(R.id.addHikeFavoriteCheckBox)
+        val buttonAddHikeSave = findViewById<Button>(R.id.button_addHikeSave)
+        val buttonAddHikeCancel = findViewById<Button>(R.id.button_addHikeCancel)
 
         val categories = resources.getStringArray(R.array.Categories)
 
-        addHikeCategorySpinner = findViewById(R.id.addHikeSpinner)
+        val addHikeCategorySpinner = findViewById<Spinner>(R.id.addHikeSpinner)
         if(addHikeCategorySpinner != null) {
             val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, categories)
             addHikeCategorySpinner.adapter = adapter
@@ -83,13 +70,16 @@ class AddHikeActivity : AppCompatActivity() , CoroutineScope {
                 }
                 val hike = Hike(0, name, area, category, length, nightstops, favorite)
                 saveHike(hike)
-                finish()
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
             }
         }
     }
-    fun saveHike(hike: Hike) {
+
+    private fun saveHike(hike: Hike) {
         launch(Dispatchers.IO) {
             db.hikeDao.insert(hike)
         }
     }
 }
+

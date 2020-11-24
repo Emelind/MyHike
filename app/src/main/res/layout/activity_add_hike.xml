@@ -21,6 +21,7 @@
         android:id="@+id/addHikeAreaName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Area"
         android:inputType="textPersonName"
@@ -31,24 +32,28 @@
         android:id="@+id/addHikeSpinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
         android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_selectCategory"
         app:layout_constraintStart_toEndOf="@+id/tv_selectCategory"
-        app:layout_constraintTop_toBottomOf="@+id/addHikeAreaName" />
+        app:layout_constraintTop_toTopOf="@+id/tv_selectCategory" />
 
     <EditText
         android:id="@+id/addHikeLength"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Length in k"
         android:inputType="number"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHikeSpinner" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_selectCategory" />
 
     <EditText
         android:id="@+id/addHikeNumberOfNightStops"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:ems="10"
         android:hint="Number of night stops"
         android:inputType="number"
@@ -59,7 +64,9 @@
         android:id="@+id/addHikeFavoriteCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:text="Add to favorites?"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addHikeNumberOfNightStops" />
 
@@ -67,6 +74,7 @@
         android:id="@+id/button_addHikeSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Save"
         app:layout_constraintEnd_toStartOf="@+id/button_addHikeCancel"
         app:layout_constraintHorizontal_bias="0.5"
@@ -77,6 +85,7 @@
         android:id="@+id/button_addHikeCancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
         android:text="Cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -88,9 +97,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="8dp"
-        android:textSize="20sp"
         android:text="Select category:"
-        app:layout_constraintBottom_toTopOf="@+id/addHikeLength"
+        android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addHikeAreaName" />
 </androidx.constraintlayout.widget.ConstraintLayout>
