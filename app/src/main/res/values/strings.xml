@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">MyHike</string>
+
+    <string name="selected_category">Selected category:</string>
+
+    <string-array name="Categories">
+        <item>Not applicable</item>
+        <item>Forest</item>
+        <item>Mountain</item>
+        <item>Coastal</item>
+    </string-array>
+
+    <string name="selected_filter">Selected filter:</string>
+
+    <string-array name="Filters">
+        <item>All hikes</item>
+        <item>Forest hikes</item>
+        <item>Mountain hikes</item>
+        <item>Coastal hikes</item>
+        <item>Day hikes</item>
+        <item>Less than 10k</item>
+    </string-array>
+</resources>
